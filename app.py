@@ -7,9 +7,14 @@ from skimage.feature import hog
 
 app = Flask(__name__)
 
-# Ajuste para Render
-app.config['UPLOAD_FOLDER'] = '/tmp'
+# Tu ID de Google Drive extraído del enlace
+file_id = '1PVBcsGXl-HlAX_5EHe_lCJIUR-1FJCxv'
+url = f'https://drive.google.com/uc?id={file_id}'
+output = 'taller_prendas.pkl'
 
+# Solo descarga el modelo si no existe ya en el servidor
+if not os.path.exists(output):
+    gdown.download(url, output, quiet=False)
 # Carga del modelo
 modelo = joblib.load('taller_prendas.pkl')
 

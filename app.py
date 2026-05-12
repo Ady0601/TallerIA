@@ -53,7 +53,7 @@ def predict():
     
     prediction = modelo.predict(processed_img)
     
-    # Mapeo de categorías de Fashion MNIST (ajusta según tu modelo)
+    # Mapeo de categorías de Fashion MNIST
     categories = ['Camiseta/Top', 'Pantalón', 'Jersey', 'Vestido', 'Abrigo', 
                   'Sandalia', 'Camisa', 'Zapatilla', 'Bolso', 'Botín']
     

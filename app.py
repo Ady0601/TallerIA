@@ -4,7 +4,12 @@ import joblib
 import numpy as np
 from flask import Flask, request, jsonify
 from PIL import Image
-from skimage import transform
+
+# Intentamos importar skimage, si falla es por falta de scikit-image en el entorno
+try:
+    from skimage import transform
+except ImportError:
+    transform = None
 
 app = Flask(__name__)
 
@@ -42,6 +47,9 @@ else:
 
 def preprocess_image(image):
     """Preprocesa la imagen para que coincida con el formato Fashion MNIST (28x28)."""
+    if transform is None:
+        raise ImportError("La librería scikit-image no está instalada correctamente.")
+        
     # Convertir a escala de grises
     img = image.convert('L')
     img = np.array(img)
